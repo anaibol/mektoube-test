@@ -11,25 +11,35 @@ body {
   height: 100%;
 }
 
-main, section, div {
-  display: flex;
-  flex-direction: row;
-}
-
-footer, header, form {
+main, section, div, form {
   display: flex;
   flex-direction: column;
 }
 
+footer, header, nav {
+  display: flex;
+  flex-direction: row;
+}
+
 button {
-    margin: .5rem;
-  padding: .5rem;
+  margin: .5rem;
+  padding: 1rem;
   background-color: #555;
   border: none;
   color: white;
+  min-width: 10rem;
 }
 
 input {
-    margin: .5rem;
+  margin: .5rem;
   padding: .5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: #666;
+  }
 }

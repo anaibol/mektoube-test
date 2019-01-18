@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import isMobile from 'is-mobile'
 
@@ -6,27 +6,19 @@ import MobileLayout from 'components/MobileLayout'
 import DesktopLayout from 'components/DesktopLayout'
 import Login from 'components/Login'
 
-import { Redirect } from '@reach/router'
-
+import { Router, Link, Redirect } from '@reach/router'
 
 import { connect } from 'react-redux'
 
-
-class App extends Component {
-  render() {
-    console.log(this.props)
-
-    //     <Redirect from="/" to="/login" />
-    return <Login path="/login" />
-
-    if (isMobile()) {
-      return <MobileLayout />
-    } else {
-      return <DesktopLayout />
-    }
-  }
+function App({ user }) {
+  return (
+    <Router>
+      {user ? <Redirect from="/" to="/home" /> : <Login path="*" />}
+      {isMobile() ? <MobileLayout path="*" /> : <DesktopLayout path="*" />}
+    </Router>
+  )
 }
 
 export default connect(state => ({
-  login: state.login,
+  user: state.login.user,
 }))(App)

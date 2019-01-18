@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Router, Redirect, Link } from '@reach/router'
 
+import { connect } from 'react-redux'
+
 import styled from '@emotion/styled'
 
 import Home from 'components/Home'
@@ -11,25 +13,45 @@ import Login from 'components/Login'
 
 import logo from '../logo.png'
 
-export default function DesktopLayout() {
+const Header = styled.header`
+  width: 100%;
+  background-color: #555;
+  color: white;
+  padding: 0 2.5rem;
+  justify-content: center;
+  align-items: center;
+`
+
+const Nav = styled.nav`
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+`
+
+function DesktopLayout({ user }) {
   return (
     <>
-      <header>
-        <nav>
-          <img src={logo} />
+      <Header>
+        <img src={logo} />
+        <Nav>
           <Link to="/">Home</Link>
-          <Link to="/encounters">Encounters</Link>
-          <Link to="/chat">Chat</Link>
-        </nav>
-      </header>
+          <Link to="/">Chat</Link>
+          <Link to="/">Encounters</Link>
+        </Nav>
+      </Header>
       <main>
+        <div>UUID: {user.uuid}</div>
+        <div>LOGIN: {user.login}</div>
+        <div>EMAIL: {user.email}</div>
         <Router>
-          <Home path="/" />
-          <Encounters path="/encounters" />
-          <Chat path="/chat" />
+          <Home path="/home" />
         </Router>
       </main>
       <footer></footer>
     </>
   )
 }
+
+export default connect(state => ({
+  user: state.login.user,
+}))(DesktopLayout)

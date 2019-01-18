@@ -12,6 +12,7 @@ import logo from '../logo.png'
 
 const Container = styled.div`
   width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
 `
@@ -38,18 +39,22 @@ class Login extends Component {
 
   render() {
     const { username, password } = this.state
+    const { requesting } = this.props.login
 
     return (
       <Container>
-        <Form onSubmit={this.onSubmit}>
-          <img src={logo} />
-          <h1>Login</h1>
-          <label htmlFor="username">Username</label>
-          <input placeholder="Your username" name="username" onChange={e => this.setState({ username: e.target.value })} defaultValue={username} />
-          <label htmlFor="password">Password</label>
-          <input placeholder="Your password" name="password" type="password" onChange={e => this.setState({ password: e.target.value })} defaultValue={password} />
-          <button>Login</button>
-        </Form>
+        {requesting && 'Logging in...'}
+        {!requesting &&
+          <Form onSubmit={this.onSubmit}>
+            <img src={logo} />
+            <h1>Login</h1>
+            <label htmlFor="username">Username</label>
+            <input placeholder="Your username" name="username" onChange={e => this.setState({ username: e.target.value })} defaultValue={username} />
+            <label htmlFor="password">Password</label>
+            <input placeholder="Your password" name="password" type="password" onChange={e => this.setState({ password: e.target.value })} defaultValue={password} />
+            <button>Login</button>
+          </Form>
+        }
       </Container>
     )
   }
