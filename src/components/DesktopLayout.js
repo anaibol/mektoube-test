@@ -23,9 +23,9 @@ const Header = styled.header`
 `
 
 const Nav = styled.nav`
+  flex: 1;
   justify-content: space-around;
   align-items: center;
-  flex: 1;
 `
 
 function DesktopLayout({ user }) {
@@ -37,6 +37,7 @@ function DesktopLayout({ user }) {
           <Link to="/">Home</Link>
           <Link to="/">Chat</Link>
           <Link to="/">Encounters</Link>
+          <Link to="/">Logout</Link>
         </Nav>
       </Header>
       <main>

@@ -11,6 +11,10 @@ body {
   height: 100%;
 }
 
+main {
+  padding: 1rem;
+}
+
 main, section, div, form {
   display: flex;
   flex-direction: column;
@@ -36,6 +40,7 @@ input {
 }
 
 a {
+  display: flex;
   text-decoration: none;
   color: inherit;
 
