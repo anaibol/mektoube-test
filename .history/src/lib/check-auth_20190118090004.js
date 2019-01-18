@@ -1,1 +1,0 @@
-lib/check-auth.js
