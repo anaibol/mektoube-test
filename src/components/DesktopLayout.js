@@ -6,9 +6,6 @@ import { connect } from 'react-redux'
 
 import styled from '@emotion/styled'
 
-import Home from 'components/Home'
-import Chat from 'components/Chat'
-import Encounters from 'components/Encounters'
 import Login from 'components/Login'
 
 import logo from '../logo.png'
@@ -44,9 +41,6 @@ function DesktopLayout({ user }) {
         <div>UUID: {user.uuid}</div>
         <div>LOGIN: {user.login}</div>
         <div>EMAIL: {user.email}</div>
-        <Router>
-          <Home path="/home" />
-        </Router>
       </main>
       <footer></footer>
     </>
