@@ -34,7 +34,7 @@ function MobileLayout({ user }) {
           <Tab to="/">Home</Tab>
           <Tab to="/">Chat</Tab>
           <Tab to="/">Encounters</Tab>
-          <Tab to="/">Logout</Tab>
+          <Tab to="/logout">Logout</Tab>
         </Tabs>
       </Header>
       <main>

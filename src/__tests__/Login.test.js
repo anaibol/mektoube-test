@@ -14,6 +14,17 @@ import store from '../redux/store'
 
 import Login from 'components/Login'
 
+beforeEach(() => {
+  const localStorageMock = {
+    getItem: jest.fn(key => mockStorage[key]),
+    setItem: jest.fn((args) => { }),
+  };
+  Object.defineProperty(window, 'localStorage', {
+    value: localStorageMock,
+    writable: true
+  })
+});
+
 test("Login button redirects to Home", async () => {
   const { getByText, queryByText } = render(
     <Provider store={store}>
@@ -29,4 +40,8 @@ test("Login button redirects to Home", async () => {
 
   expect(navigate).toHaveBeenCalledTimes(1)
   expect(navigate).toHaveBeenCalledWith('/home')
+
+  expect(localStorage.setItem).toHaveBeenCalledTimes(1)
+
+  expect(localStorage.setItem.mock.calls[0][0]).toBe('token')
 })

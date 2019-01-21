@@ -1,7 +1,6 @@
 export const LOGIN_REQUESTING = 'LOGIN_REQUESTING'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
-const LOGIN_EXISTING = 'LOGIN_EXISTING'
 const LOGOUT = 'LOGOUT'
 
 const initialState = {
@@ -9,15 +8,20 @@ const initialState = {
   successful: false,
   messages: [],
   errors: [],
+  user: null
 }
 
-// In order to perform an action of type LOGIN_REQUESTING
-// we need an username and password
 export function loginRequest({ username, password }) {
   return {
     type: LOGIN_REQUESTING,
     username,
     password,
+  }
+}
+
+export function logout() {
+  return {
+    type: LOGOUT,
   }
 }
 
@@ -53,6 +57,15 @@ export default function (state = initialState, action) {
         messages: [],
         requesting: false,
         successful: false,
+      }
+
+    case LOGOUT:
+      return {
+        errors: [],
+        messages: [],
+        requesting: false,
+        successful: true,
+        user: null
       }
 
     default:
