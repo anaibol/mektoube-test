@@ -1,9 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from 'react'
+import { Provider } from 'react-redux'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+import { render } from 'react-testing-library'
+
+import App from './App'
+
+import store from './redux/store'
+
+
+test('renders without crashing', () => {
+  render(<Provider store={store}>
+    <App />
+  </Provider>)
+})
+

@@ -1,14 +1,10 @@
 import React from 'react'
 
-import { Router, Redirect, Link } from '@reach/router'
+import { Link } from '@reach/router'
 
 import { connect } from 'react-redux'
 
 import styled from '@emotion/styled'
-
-import Login from 'components/Login'
-
-import logo from '../logo.png'
 
 const Header = styled.header`
   width: 100%;

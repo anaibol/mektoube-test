@@ -6,7 +6,7 @@ import MobileLayout from 'components/MobileLayout'
 import DesktopLayout from 'components/DesktopLayout'
 import Login from 'components/Login'
 
-import { Router, Link, Redirect } from '@reach/router'
+import { Router, Redirect } from '@reach/router'
 
 import { connect } from 'react-redux'
 

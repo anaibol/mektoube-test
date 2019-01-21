@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 
 import { loginRequest } from 'redux/modules/login'
 
-import { navigate } from '@reach/router'
-
 import styled from '@emotion/styled'
 
 import logo from '../logo.png'
@@ -46,7 +44,7 @@ class Login extends Component {
         {requesting && 'Logging in...'}
         {!requesting &&
           <Form onSubmit={this.onSubmit}>
-            <img src={logo} />
+            <img src={logo} alt="Mektoube logo" />
             <h1>Login</h1>
             <label htmlFor="username">Username</label>
             <input placeholder="Your username" name="username" onChange={e => this.setState({ username: e.target.value })} defaultValue={username} />
