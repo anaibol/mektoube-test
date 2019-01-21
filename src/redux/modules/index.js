@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
 import apiClient from './api-client'
-import login from './login'
+import auth from './auth'
 
-export default combineReducers({ apiClient, login })
+export default combineReducers({ apiClient, auth })

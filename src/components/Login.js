@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 
-import { loginRequest } from 'redux/modules/login'
+import { authRequest } from 'redux/modules/auth'
 
 import styled from '@emotion/styled'
 
@@ -32,12 +32,12 @@ class Login extends Component {
 
     const { username, password } = this.state
 
-    this.props.loginRequest({ username, password })
+    this.props.authRequest({ username, password })
   }
 
   render() {
     const { username, password } = this.state
-    const { requesting } = this.props.login
+    const { requesting } = this.props.auth
 
     return (
       <Container>
@@ -59,5 +59,5 @@ class Login extends Component {
 }
 
 export default connect(state => ({
-  login: state.login
-}), { loginRequest })(Login)
+  auth: state.auth
+}), { authRequest })(Login)

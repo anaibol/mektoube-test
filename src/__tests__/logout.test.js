@@ -14,12 +14,12 @@ jest.mock('@reach/router', () => ({
 import Logout from 'components/Logout'
 
 test("Logout button redirects to Home", async () => {
-  // const { getByText } = render(
-  //   <Logout />
-  // )
+  const { getByText } = render(
+    <Logout />
+  )
 
   // await wait(() => { })
 
-  // expect(navigate).toHaveBeenCalledTimes(1)
-  // expect(navigate).toHaveBeenCalledWith('/home')
+  expect(navigate).toHaveBeenCalledTimes(1)
+  expect(navigate).toHaveBeenCalledWith('/')
 })

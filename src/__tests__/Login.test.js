@@ -18,6 +18,7 @@ beforeEach(() => {
   const localStorageMock = {
     getItem: jest.fn(key => mockStorage[key]),
     setItem: jest.fn((args) => { }),
+    removeItem: jest.fn(key => { }),
   };
   Object.defineProperty(window, 'localStorage', {
     value: localStorageMock,

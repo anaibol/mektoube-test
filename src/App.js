@@ -22,5 +22,5 @@ function App({ user }) {
 }
 
 export default connect(state => ({
-  user: state.login.user,
+  user: state.auth.user,
 }))(App)

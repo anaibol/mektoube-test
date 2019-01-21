@@ -48,5 +48,5 @@ function MobileLayout({ user }) {
 }
 
 export default connect(state => ({
-  user: state.login.user,
+  user: state.auth.user,
 }))(MobileLayout)

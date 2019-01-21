@@ -53,5 +53,5 @@ function DesktopLayout({ user }) {
 }
 
 export default connect(state => ({
-  user: state.login.user,
+  user: state.auth.user,
 }))(DesktopLayout)

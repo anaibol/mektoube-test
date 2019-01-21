@@ -1,7 +1,7 @@
-export const LOGIN_REQUESTING = 'LOGIN_REQUESTING'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_ERROR = 'LOGIN_ERROR'
-const LOGOUT = 'LOGOUT'
+export const AUTH_REQUESTING = 'AUTH_REQUESTING'
+export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const AUTH_ERROR = 'AUTH_ERROR'
+export const LOGOUT = 'LOGOUT'
 
 const initialState = {
   requesting: false,
@@ -11,9 +11,9 @@ const initialState = {
   user: null
 }
 
-export function loginRequest({ username, password }) {
+export function authRequest({ username, password }) {
   return {
-    type: LOGIN_REQUESTING,
+    type: AUTH_REQUESTING,
     username,
     password,
   }
@@ -21,14 +21,14 @@ export function loginRequest({ username, password }) {
 
 export function logout() {
   return {
-    type: LOGOUT,
+    type: LOGOUT
   }
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
     // Set the requesting flag and append a message to be shown
-    case LOGIN_REQUESTING:
+    case AUTH_REQUESTING:
       return {
         requesting: true,
         successful: false,
@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
       }
 
     // Successful?  Reset the login state.
-    case LOGIN_SUCCESS:
+    case AUTH_SUCCESS:
       return {
         errors: [],
         messages: [],
@@ -48,7 +48,7 @@ export default function (state = initialState, action) {
 
     // Append the error returned from our api
     // set the success and requesting flags to false
-    case LOGIN_ERROR:
+    case AUTH_ERROR:
       return {
         errors: state.errors.concat([{
           body: action.error.toString(),

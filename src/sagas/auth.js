@@ -14,10 +14,11 @@ import {
 import qs from 'querystring'
 
 import {
-  LOGIN_REQUESTING,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
-  LOGOUT
+  AUTH_REQUESTING,
+  AUTH_SUCCESS,
+  AUTH_ERROR,
+  LOGOUT,
+  logout
 } from 'redux/modules/auth'
 
 import {
@@ -28,7 +29,7 @@ import {
 
 import api from 'lib/api-client'
 
-function loginApi(username, password) {
+function authApi(username, password) {
   return api.post('/gate/flo98732.json', qs.stringify({
     login: username,
     password: password,
@@ -36,16 +37,16 @@ function loginApi(username, password) {
   }))
 }
 
-export function* loginFlow(username, password) {
+export function* authFlow(username, password) {
   let token
 
   try {
-    const response = yield call(loginApi, username, password)
+    const response = yield call(authApi, username, password)
 
     yield put(setApiClient(response.CONTENT.token))
 
     yield put({
-      type: LOGIN_SUCCESS,
+      type: AUTH_SUCCESS,
       user: response.CONTENT.USER
     })
 
@@ -54,28 +55,28 @@ export function* loginFlow(username, password) {
     navigate('/home')
   } catch (error) {
     yield put({
-      type: LOGIN_ERROR,
+      type: AUTH_ERROR,
       error
     })
   } finally {
     if (yield cancelled()) {
-      navigate('/login')
+      navigate('/auth')
     }
   }
 
   return token
 }
 
-export function* loginWatcher() {
+export function* loginSaga() {
   while (true) {
     const {
       username,
       password
-    } = yield take(LOGIN_REQUESTING)
+    } = yield take(AUTH_REQUESTING)
+    //
+    const task = yield fork(authFlow, username, password)
 
-    const task = yield fork(loginFlow, username, password)
-
-    const action = yield take([API_CLIENT_UNSET, LOGIN_ERROR])
+    const action = yield take([API_CLIENT_UNSET, AUTH_ERROR])
 
     if (action.type === API_CLIENT_UNSET) yield cancel(task)
 
@@ -83,23 +84,19 @@ export function* loginWatcher() {
   }
 }
 
-export function* logout() {
-  yield put(unsetApiClient())
-
-  localStorage.removeItem('token')
-
-  navigate('/')
-}
-
-export function* logoutWatcher() {
+export function* logoutSaga() {
   while (true) {
+    yield take(LOGOUT)
+
+    console.log('asdsd')
+    navigate('/')
+
+    yield put(unsetApiClient())
+
+    localStorage.removeItem('token')
+    navigate('/')
+
     yield call(logout)
 
-    navigate('/')
   }
-}
-
-export default function* root() {
-  yield fork(loginWatcher)
-  yield fork(logoutWatcher)
 }
